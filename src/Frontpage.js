@@ -110,13 +110,12 @@ class Frontpage extends React.Component {
 
     top5rev() {
         var revall = []
-        var rev5 = []
+
         var cnt = 0
         var top5 = []
 
         this.state.reviews.map(res =>
             revall.push(res.review_id, res.updated_at)
-            //(cnt <= 5) ? avg5.push(res.avgrating) : cnt = cnt
         )
 
         let except = []
@@ -131,56 +130,27 @@ class Frontpage extends React.Component {
                     !except.includes(ind) &&
                     !except.includes(j + 1)
                 ) {
-                    //console.log(revs[j].updated_at + " smaller than " + revs[j+1].updated_at)
-
-                    console.log("ind: " + ind)
                     ind = j + 1
-                    console.log("j: " + j)
-
-                    console.log(revs[ind].updated_at)
                 }
             }
 
             except.push(ind)
-            console.log(ind + " pushed")
-            console.log(except)
-            //except.push(revs[recent].review_id)
         }
 
-        /*for(let j = 0; j < except.length; j++) {
-        rev5.push[revs]
-    }*/
+        var rev5 = []
+        for (let i = 0; i < revs.length; i++) {
+            cnt++
+            if (cnt <= except.length) rev5.push(revs[except[i]].review_id)
+        }
 
-        //console.log(except)
+        console.log(rev5)
+        for (let i = 0; i < rev5.length; i++) {
+            this.state.reviews.map(rev =>
+                rev5[i] === rev.review_id ? top5.push(rev) : 0
+            )
+        }
 
-        /*var revs = this.state.reviews
-    console.log(revs.length)
-    let recent 
-    for (var key in revs) {
-        console.log(key)
-        console.log(revs[2])
-        recent = revs[key].updated_at
-        if((key+1)===revs.length) break;
-       
-    }*/
-
-        //revall.push(res.updates_at)
-
-        //console.log(revall)
-
-        /*
-    for(let i = 0; i < 5; i++) {
-        avg5.push(avgall[i])
-    }  
-    
-    for(let i = 0; i < avg5.length; i++) {
-        this.state.restaurants.find((restaurant) => ( 
-            (avg5[i] === restaurant.restaurant_id) ? top5.push(restaurant) : 0 
-        ));
-        
-    }  
-    return top5
-    */
+        return top5
     }
 
     findRestaurant(rev) {
@@ -193,7 +163,7 @@ class Frontpage extends React.Component {
 
     render() {
         let top5res = this.top5()
-        this.top5rev()
+        let toprev = this.top5rev()
         return (
             <React.Fragment>
                 <h1>Top 5 restaurants in your area</h1>
@@ -234,14 +204,15 @@ class Frontpage extends React.Component {
                                 />
                                 <h4>{restaurant.category}</h4>
                                 <CardText>{restaurant.description}</CardText>
-                                <Button href="./Review">Review</Button>
+                                <Button>Edit</Button>
                             </Card>
                         </Col>
                     ))}
                 </Row>
 
+                <h1>Recent 5 reviews</h1>
                 <Row>
-                    {this.state.reviews.map(rev => (
+                    {toprev.map(rev => (
                         <Col sm="4">
                             <Card body>
                                 <h4>{this.findRestaurant(rev)}</h4>
