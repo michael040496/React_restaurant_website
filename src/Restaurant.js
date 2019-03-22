@@ -134,7 +134,7 @@ render() {
                     />
                     <h4>{restaurant.category}</h4>
                     <CardText>{restaurant.description}</CardText>
-                    <Button>Edit</Button>
+                    <Button href="/Addrestaurant">Review</Button>
                 </Card>
             </Col>
       

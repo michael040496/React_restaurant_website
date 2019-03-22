@@ -55,7 +55,8 @@ class AddRestaurantComp extends Component {
         })
 
         alert("The restaurant is added")
-        window.location = "/Restaurant"
+        window.location = "/"
+       
     }
 
     render() {

@@ -61,7 +61,7 @@ class RegisterForm extends Component {
         })
 
         alert("The user is registered")
-        window.location = "/Restaurant"
+        window.location = "/"
     }
 
     render() {

@@ -56,7 +56,7 @@ class AddReviewComp extends Component {
         })
 
         console.log(review)
-        window.location = "/Restaurant"
+        window.location = "/"
     }
 
     render() {
